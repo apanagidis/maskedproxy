@@ -1,5 +1,7 @@
+require('dotenv').config();
+
 // users hardcoded for simplicity, store in a db for production applications
-const users = [{ id: 1, username: 'test', password: 'test', firstName: 'Test', lastName: 'User' }];
+const users = [{ id: 1, username: process.env.USERNAME.trim() , password: process.env.PASSWORD.trim(), firstName: 'Test', lastName: 'User' }];
 
 module.exports = {
     authenticate,

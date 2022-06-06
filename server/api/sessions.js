@@ -1,6 +1,8 @@
 const { Router } = require('express');
 var sqlite3 = require('sqlite3').verbose();
 const VoiceResponse = require('twilio').twiml.VoiceResponse;
+require('dotenv').config();
+
 
 const sessionsRouter = Router();
 
@@ -16,7 +18,7 @@ const query = (command, method = 'all') => {
     });
   };
 
-var db = new sqlite3.Database('./proxy.db', sqlite3.OPEN_READWRITE,
+var db = new sqlite3.Database(process.env.PROXY_NAME.trim(), sqlite3.OPEN_READWRITE,
 function(err) {
     if (err)
         console.log("DB" + err);
