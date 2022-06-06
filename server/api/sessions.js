@@ -96,7 +96,9 @@ sessionsRouter.get('/session', (request, response) => {
             console.log("session", session);
             if(session === undefined || session.length == 0){
                 console.log("No active session")
-                twiml.say({ language: 'en-AU', voice:'Polly.Nicole' }, 'Technical error, no active session. Goodbye');
+                // play a message to call customer service when there's no delivery assigned
+                twiml.say({ language: 'en-AU', voice:'Polly.Nicole' }, 'Unable to connect your call to the other party, please wait until we connect you to support');
+                twiml.dial(process.env.SUPPORT_NUM,{});
             }
             else{        
                 let recipient = session.customer_number==caller ? session.driver_number : session.customer_number;
